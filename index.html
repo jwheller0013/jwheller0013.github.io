@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>James Heller - Data Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-brand">James Heller</div>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#summary">Summary</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <h1>James Heller's Portfolio</h1>
+  </header>
+
+  <section class="profile">
+    <img src="./resources/image.png" alt="James's profile picture">
+    <div class="info">
+      <p>
+        💼 <strong>Data Engineer</strong><br>
+        📧 <a href="mailto:jwheller0013@yahoo.com">jwheller0013@yahoo.com</a><br>
+        📄 <a href="https://docs.google.com/document/d/13H_OyLxBmnk61iIaj8_p_g7y1hJDySWH1L5DWJD51xc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Resume</a><br>
+        🔗 <a href="https://www.linkedin.com/in/james-heller-xiii/" target="_blank" rel="noopener noreferrer">LinkedIn</a> |
+        🧐 <a href="https://github.com/jwheller0013" target="_blank" rel="noopener noreferrer">GitHub</a><br>
+        📍 Located in Glen Mills, PA
+      </p>
+    </div>
+  </section>
+
+  <section class="summary" id="summary">
+    <h2>Professional Summary</h2>
+    <p>
+      Hi, my name is James Heller and I am a recent graduate of
+      <a href="https://zipcodewilmington.com/" target="_blank" rel="noopener noreferrer">ZIP Code Wilmington</a> 
+      Data Engineering cohort — a nationally recognized, highly selective program that accepts fewer than 12% of applicants.
+    </p>
+    <p>
+      I have always enjoyed intellectual puzzles and approaching problems analytically breaking things down to solve. This led me to a love of science, graduating Penn State with a degree in Biology. Post graduation I worked in customer service roles for 8 years focusing on empathy in my approach. My past 5 years have been at MedScope America, a medical alert company. Initially my role was Tech Support troubleshooting units with users ensuring any issues outside the norm were documented with steps to address to share amongst my team. My most recent role was Operations Specialist where I troubleshoot internal issues with our system and performed what I came to learn were ETL procedures providing reports for care agencies. Data Engineering I see as the culmination of my skill set as my experience in Customer Service will allow better results in interactions with stakeholders and my penchant for puzzles in analyzing data. Merging these skill sets will allow me to be a valued member of your organization.
+    </p>
+    <p>
+      Take a look at some of my recent projects and feel free reach out to me via my LinkedIn page.
+    </p>
+  </section>
+
+  <section class="projects" id="projects">
+    <h2>Featured Projects</h2>
+    <div class="project-grid">
+      <!-- Project cards here -->
+       <!-- Project Card 1 -->
+      <div style="flex: 1 1 300px; max-width: 360px; border: 1px solid #ddd; border-radius: 12px; padding: 20px; box-shadow: 2px 2px 8px rgba(0,0,0,0.05);">
+        <h3 style="margin-top: 0;">MuseDash</h3>
+        <p style="color: #777; margin: 5px 0;"><strong>⚙️ Tech Stack:</strong> Python, PySpark, Pandas, Streamlit, AWS S3, Altair, Plotly</p>
+        <p>Our team of 4 members, built an interactive analytical dashboard uncovering user listening habits and artist popularity.</p>
+        <p>
+          <a href="https://github.com/ZCWDataSixZero/MuseDash" target="_blank" style="margin-right: 10px;">🔗 GitHub</a>
+        </p>
+        <p class="status completed">✅ Completed</p>
+      </div>
+  
+      <!-- Project Card 2 -->
+      <div style="flex: 1 1 300px; max-width: 360px; border: 1px solid #ddd; border-radius: 12px; padding: 20px; box-shadow: 2px 2px 8px rgba(0,0,0,0.05);">
+        <h3 style="margin-top: 0;">My-Collection-Project</h3>
+        <p style="color: #777; margin: 5px 0;"><strong>⚙️ Tech Stack:</strong> Python, JavaScript, HTML</p>
+        <p>My Collection is a collection app that allows a user to scan the barcode of an item to fill out parameters of an item to add to their collection. Once added to a collection the user can view their collections, view entries in their collection, edit entry details, sort the collection, select one at random from the collection, go to a random item from all their collections, and future plans to improve the control of your collection.</p>
+        <p>
+          <a href="https://github.com/jwheller0013/My-Collection-Project.git" target="_blank" style="margin-right: 10px;">🔗 GitHub</a>
+        </p>
+        <p class="status in-progress">🚧 In Progress</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="certificates" id="certificates">
+    <h2>Education & Certificates</h2>
+    <!-- Certificate buttons and viewers here -->
+    
+      <div style="text-align: center; margin-top: 40px;">
+        <button id="zipButton" onclick="togglePDF('zipViewer', 'zipButton', '🧾', 'Preview Certificate', 'Hide Certificate')" class="cert-btn">
+          🧾 Preview Certificate
+        </button>
+      </div>
+      <div id="zipViewer" class="pdf-viewer">
+        <iframe src="./resources/zipcode_certificate.pdf"></iframe>
+        <p><a href="./resources/zipcode_certificate.pdf" target="_blank">Open Certificate in a new tab</a></p>
+      </div>
+
+    </section>
+  </section>
+
+  <footer class="footer" id="contact">
+    <p>&copy; 2025 James Heller &mdash; <a href="mailto:jwheller0013@yahoo.com">jwheller0013@yahoo.com</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('navToggle').addEventListener('click', () => {
+      document.getElementById('navMenu').classList.toggle('show');
+    });
+
+    function togglePDF(viewerId, buttonId, icon, showText, hideText) {
+      const viewer = document.getElementById(viewerId);
+      const button = document.getElementById(buttonId);
+      const isOpen = viewer.classList.contains('expanded');
+
+      viewer.classList.toggle('expanded');
+      button.innerHTML = isOpen ? `${icon} ${showText}` : `${icon} ${hideText}`;
+    }
+  </script>
+</body>
+</html>

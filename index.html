@@ -102,39 +102,70 @@
   </footer>
 
   <script>
-    // Multiple approaches to force page to start at top
+    // Ultra aggressive approach - runs immediately
+    document.addEventListener('DOMContentLoaded', function() {
+      // Clear URL hash
+      if (window.location.hash) {
+        history.replaceState('', document.title, window.location.pathname + window.location.search);
+      }
 
-    // Method 1: Immediate scroll on page load
-    window.addEventListener('load', function() {
+      // Force scroll to top
       window.scrollTo(0, 0);
-      document.body.scrollTop = 0;
       document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+
+      // Set up navbar toggle
+      document.getElementById('navToggle').addEventListener('click', () => {
+        document.getElementById('navMenu').classList.toggle('show');
+      });
     });
 
-    // Method 2: Force scroll before page loads
-    window.addEventListener('beforeunload', function() {
-      window.scrollTo(0, 0);
-    });
-
-    // Method 3: Handle browser history/back button
-    window.addEventListener('pageshow', function(event) {
-      if (event.persisted) {
+    // Run on window load as well
+    window.addEventListener('load', function() {
+      setTimeout(() => {
         window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }, 50);
+
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      }, 200);
+    });
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 100);
       }
     });
 
-    // Method 4: Force scroll as soon as DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
+    // Force scroll on any focus events
+    window.addEventListener('focus', function() {
       window.scrollTo(0, 0);
     });
 
-    // Method 5: Override any hash-based scrolling
-    if (window.location.hash) {
-      window.location.hash = '';
-      window.scrollTo(0, 0);
-    }
-    document.getElementById('navToggle').addEventListener('click', () => {
-      document.getElementById('navMenu').classList.toggle('show');
+    // Override any programmatic scrolling
+    let originalScrollTo = window.scrollTo;
+    window.scrollTo = function(x, y) {
+      if (y !== 0) {
+        // Only allow scrolling to top initially
+        if (document.readyState === 'loading') {
+          return originalScrollTo.call(this, 0, 0);
+        }
+      }
+      return originalScrollTo.call(this, x, y);
+    };
+
+    // Restore normal scrolling after page loads
+    window.addEventListener('load', function() {
+      setTimeout(() => {
+        window.scrollTo = originalScrollTo;
+      }, 1000);
     });
 
     function togglePDF(viewerId, buttonId, icon, showText, hideText) {
